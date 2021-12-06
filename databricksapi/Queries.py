@@ -49,9 +49,29 @@ class Queries(Databricks.Databricks):
 		url = self._set_url(self._url, self._api_type, endpoint)
 		
 		return self._get(url) 
+		
+	def getQueryPermissions(self, query_id):
+		endpoint = 'permissions/queries/'+str(query_id)
+		url = self._set_url(self._url, self._api_type, endpoint)
+		
+		return self._get(url) 
+		
+	def updateQueryPermissions(self, query_id, acl):
+		endpoint = 'permissions/queries/'+str(query_id)
+		url = self._set_url(self._url, self._api_type, endpoint)
+		
+		return self._post(url, acl) 
+		
+	def transferQuery(self, query_id, new_owner):
+		endpoint = 'permissions/query/'+str(query_id)+'/transfer'
+		url = self._set_url(self._url, self._api_type, endpoint)
+		
+		payload = {"new_owner": new_owner}
+		
+		return self._post(url, payload) 
 
 	def updateQuery(self, query_id, data_source_id=None, query=None, name=None, description=None, schedule=None, options=None, visualizations=None):
-		endpoint = 'queries/'+str(query_id)
+		endpoint = 'queries/'+str(query_id) # tested
 		url = self._set_url(self._url, self._api_type, endpoint)
 		payload = self.getQuery(query_id)
 
