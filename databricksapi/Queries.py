@@ -76,25 +76,18 @@ class Queries(Databricks.Databricks):
 		
 		return self._post(url, payload) 
 
-	def updateQuery(self, query_id, data_source_id=None, query=None, name=None, description=None, schedule=None, options=None, visualizations=None):
-		endpoint = 'queries/'+str(query_id) # tested
+	def updateQuery(self, query_id, new_query_definition):
+		endpoint = 'queries/'+str(query_id)
 		url = self._set_url(self._url, self._api_type, endpoint)
 		payload = self.getQuery(query_id)
+		payload.update(new_query_definition)
 
-		if data_source_id: payload["data_source_id"]=data_source_id
-		if query: payload["query"]=query
-		if name: payload["name"]=name
-		if description: payload["description"]=description
-		if schedule: payload["schedule"]=schedule
-		if options: payload["options"]=options
-		if visualizations: payload["visualizations"]=visualizations
-		
 		return self._post(url, payload) 
 
 	def deleteQuery(self, query_id):
 		endpoint = 'queries/'+str(query_id)
 		url = self._set_url(self._url, self._api_type, endpoint)
-		
+		print(url)
 		return self._delete(url)  
 
 	def restoreQuery(self, query_id):
