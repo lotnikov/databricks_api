@@ -119,9 +119,9 @@ class Databricks:
 		headers = {'content_type': 'multipart/form-data', 'authorization': self._token}
 		if payload is None:
 			if files is None:
-				r = requests.put(url, headers=self._headers)
+				r = requests.delete(url, headers=self._headers)
 			else:
-				r = requests.put(url, headers=headers, files=files)
+				r = requests.delete(url, headers=headers, files=files)
 		else:
 			if files is not None:
 				r = requests.delete(url, data=payload, headers=headers, files=files)
