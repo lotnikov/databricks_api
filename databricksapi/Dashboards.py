@@ -27,6 +27,12 @@ class Dashboards(Databricks.Databricks):
 		
 		return self._post(url, dashboard_definition)
 		
+	def updateDashboard(self, dashboard_id, dashboard_definition):
+		endpoint = 'dashboards/' + dashboard_id
+		url = self._set_url(self._url, self._api_type, endpoint)
+		
+		return self._post(url, dashboard_definition)
+		
 	def createDashboard(self, name, layout, dashboard_filters_enabled, widgets, is_trashed, is_draft, tags):
 		endpoint = 'dashboards'
 		url = self._set_url(self._url, self._api_type, endpoint)
@@ -90,3 +96,15 @@ class Dashboards(Databricks.Databricks):
 		url = self._set_url(self._url, self._api_type, endpoint)
 		
 		return self._post(url)
+
+	def createWidget(self, widget_definition):
+		endpoint = 'widgets'
+		url = self._set_url(self._url, self._api_type, endpoint)
+		
+		return self._post(url, widget_definition)
+		
+	def createVisualization(self, vis_definition):
+		endpoint = 'visualizations'
+		url = self._set_url(self._url, self._api_type, endpoint)
+		
+		return self._post(url, vis_definition)
