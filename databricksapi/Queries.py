@@ -26,6 +26,12 @@ class Queries(Databricks.Databricks):
 		url = self._set_url(self._url, self._api_type, endpoint)
 
 		return self._get(url)
+		
+	def cloneQuery(self, query_definition):
+		endpoint = 'queries'
+		url = self._set_url(self._url, self._api_type, endpoint)
+		
+		return self._post(url, query_definition)
 
 	def createQuery(self, data_source_id, query, name, description, schedule, options, visualizations):
 		endpoint = 'queries'
